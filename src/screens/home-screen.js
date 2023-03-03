@@ -8,6 +8,7 @@ import {
   MagnifyingGlassIcon,
   AdjustmentsHorizontalIcon,
 } from "react-native-heroicons/outline";
+import Categories from "../components/Categories";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -38,22 +39,22 @@ const HomeScreen = () => {
       </View>
       <View className="flex-row mx-4 items-center pb-2 space-x-2">
         <View className="flex-row space-x-2 bg-gray-200 px-2 py-2 rounded-full items-center flex-1">
-         <MagnifyingGlassIcon color="gray" size={20} /> 
+          <MagnifyingGlassIcon color="gray" size={20} />
           <TextInput
             placeholder="Restaurants and Cuisines"
             keyboardType="default"
           ></TextInput>
         </View>
-         <AdjustmentsHorizontalIcon color="#00CCBB" /> 
+        <AdjustmentsHorizontalIcon color="#00CCBB" />
       </View>
       <ScrollView className="bg-gray-100 flex-1">
+          <Categories />
       </ScrollView>
     </SafeAreaView>
   );
 };
 
 export default HomeScreen;
-
 
 // useLayoutEffect is a hook in React that works similarly to useEffect, but it fires synchronously after all DOM mutations.
 
