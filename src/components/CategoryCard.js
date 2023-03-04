@@ -12,7 +12,7 @@ const CategoriesCard = ({imgUrl,title}) => {
       >
         
       </Image>
-      <Text className="font-bold absolute text-white bottom-2 left-3">
+      <Text className="font-bold absolute text-white bottom-2 left-3 bg-black rounded-lg p-2 bg-opacity-25">
         {title}
       </Text>
     </TouchableOpacity>

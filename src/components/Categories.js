@@ -1,9 +1,19 @@
-import { View, Text } from "react-native";
-import React from "react";
-import { ScrollView } from "react-native-web";
+import { View, Text,ScrollView } from "react-native";
+import React, {useState,useEffect} from "react";
 import CategoriesCard from "./CategoryCard";
+import client,{urlFor} from "../sanity";
 
 const Categories = () => {
+  const [categories, setCategories] = useState([]);
+  
+  useEffect(() => {
+   client.fetch(`
+   *[_type=="category"]
+   `).then((data)=>{
+    setCategories(data);
+   })
+  }, []);
+
   return (
     <ScrollView
       contentContainerStyle={{
@@ -13,12 +23,13 @@ const Categories = () => {
       horizontal
       showsHorizontalScrollIndicator={false}
     >
-      <CategoriesCard imgUrl='https://qph.cf2.quoracdn.net/main-qimg-a934f02ccafae975aef2c8a04711058e-lq' title='shinchan'/>
-      <CategoriesCard imgUrl='https://qph.cf2.quoracdn.net/main-qimg-a934f02ccafae975aef2c8a04711058e-lq' title='shinchan'/>
-      <CategoriesCard imgUrl='https://qph.cf2.quoracdn.net/main-qimg-a934f02ccafae975aef2c8a04711058e-lq' title='shinchan'/>
-      <CategoriesCard imgUrl='https://qph.cf2.quoracdn.net/main-qimg-a934f02ccafae975aef2c8a04711058e-lq' title='shinchan'/>
-      <CategoriesCard imgUrl='https://qph.cf2.quoracdn.net/main-qimg-a934f02ccafae975aef2c8a04711058e-lq' title='shinchan'/>
-      <CategoriesCard imgUrl='https://qph.cf2.quoracdn.net/main-qimg-a934f02ccafae975aef2c8a04711058e-lq' title='shinchan'/>
+       {categories?.map(category=>(
+      <CategoriesCard 
+      key={category._id}
+      imgUrl={urlFor(category.image).url()}
+      title={category.name}
+      />
+     ))}
     </ScrollView>
   );
 };
